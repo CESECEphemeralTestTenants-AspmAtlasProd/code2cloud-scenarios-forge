@@ -15,6 +15,10 @@ on:
         description: Azure region
         type: string
         default: eastus
+      enable_defender_plans:
+        description: Manage Defender CSPM and Containers pricing plans
+        type: boolean
+        default: false
 
 permissions:
   id-token: write
@@ -25,13 +29,14 @@ jobs:
     name: Terraform plan/apply
     runs-on: ubuntu-latest
     environment: prod
+    timeout-minutes: 20
     env:
       TF_VAR_location: ${{ inputs.location || vars.AZURE_LOCATION }}
       TF_VAR_resource_prefix: ${{ inputs.resource_prefix || vars.RESOURCE_PREFIX }}
       TF_VAR_environment: prod
       TF_VAR_github_repo: ${{ github.repository }}
       TF_VAR_workflow_principal_object_id: ${{ vars.WORKFLOW_PRINCIPAL_OBJECT_ID }}
-      TF_VAR_enable_defender_plans: "true"
+      TF_VAR_enable_defender_plans: ${{ inputs.enable_defender_plans }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -62,7 +67,7 @@ jobs:
 
       - name: Terraform plan
         working-directory: infra/terraform
-        run: terraform plan -out=tfplan
+        run: terraform plan -input=false -no-color -out=tfplan
 
       - name: Upload plan
         uses: actions/upload-artifact@v4
@@ -73,7 +78,7 @@ jobs:
       - name: Terraform apply
         if: inputs.apply == true
         working-directory: infra/terraform
-        run: terraform apply -auto-approve tfplan
+        run: terraform apply -input=false -auto-approve tfplan
 
       - name: Print outputs
         if: inputs.apply == true
