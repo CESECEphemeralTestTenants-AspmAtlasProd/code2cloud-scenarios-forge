@@ -7,8 +7,10 @@ This plan is the reusable procedure for the C2C Prod tenant lab.
 - GitHub repo exists: `CESECEphemeralTestTenants-AspmAtlasProd/code2cloud-scenarios`.
 - GitHub environment exists: `prod`.
 - `AZURE_TENANT_ID` is configured as `be689950-2726-4042-9af2-2e821348b8f2`.
-- Azure deployment is paused until the Defender for Cloud GitHub connector is activated and verified for this org/repo.
-- No Azure resource deployment should run before connector activation is complete.
+- Defender for Cloud GitHub connector is created and authorized for all repositories in `CESECEphemeralTestTenants-AspmAtlasProd`.
+- Azure subscription is `AspmAtlasProd-Subscription` / `abc9a611-db88-42cb-94cb-6869755a18e6`.
+- Entra app `c2c-prod-github-actions` and GitHub Actions OIDC bootstrap are configured.
+- No Azure resource deployment should run with `apply=true` until explicitly approved.
 
 ## Gate 0 - Activate Defender GitHub Connector
 
@@ -61,6 +63,13 @@ az account list --all --query "[?tenantId=='be689950-2726-4042-9af2-2e821348b8f2
 ```
 
 Capture the target subscription ID and choose a region supported by Defender DevOps security, for example `eastus`.
+
+Captured Prod subscription:
+
+```text
+subscription_name=AspmAtlasProd-Subscription
+subscription_id=abc9a611-db88-42cb-94cb-6869755a18e6
+```
 
 ## Step 2 - Verify Connector Discovery Before Infra
 

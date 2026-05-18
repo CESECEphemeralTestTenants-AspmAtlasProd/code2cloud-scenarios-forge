@@ -14,7 +14,8 @@ isolated test subscription.
 | Repo | `code2cloud-scenarios` |
 | GitHub environment | `prod` |
 | Azure tenant ID | `be689950-2726-4042-9af2-2e821348b8f2` |
-| Azure subscription ID | Pending access/input |
+| Azure subscription ID | `abc9a611-db88-42cb-94cb-6869755a18e6` |
+| Azure subscription name | `AspmAtlasProd-Subscription` |
 | Default resource prefix | `c2cprod` |
 | Kubernetes namespace | `c2c-scenarios` |
 
@@ -35,6 +36,8 @@ isolated test subscription.
 5. Run `.github/workflows/c2c-scenario-infra.yml` with `apply=true`.
 6. Run `.github/workflows/c2c-vuln-container-build.yml` with `deploy_to_aks=true`.
 7. Validate C2C Flow A, ACR/AKS findings, and the same CVE across Code, Build, Ship, and Runtime.
+
+Current bootstrap status: the Defender connector is created with all-repository GitHub org authorization, the repo/workflows are pushed, and the `prod` environment has Azure OIDC variables configured. Do not run `apply=true` until Azure resource creation is approved.
 
 Detailed steps are in [docs/deployment-plan.md](docs/deployment-plan.md).
 C2C Defender for Cloud vulnerable scenario lab for Prod ephemeral tenant

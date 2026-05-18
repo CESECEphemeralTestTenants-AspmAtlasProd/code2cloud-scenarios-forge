@@ -27,7 +27,7 @@ Configure these on the `prod` GitHub environment:
 ```text
 AZURE_CLIENT_ID=<entra-app-client-id>
 AZURE_TENANT_ID=be689950-2726-4042-9af2-2e821348b8f2
-AZURE_SUBSCRIPTION_ID=<target-subscription-id>
+AZURE_SUBSCRIPTION_ID=abc9a611-db88-42cb-94cb-6869755a18e6
 AZURE_LOCATION=eastus
 RESOURCE_PREFIX=c2cprod
 RESOURCE_GROUP_NAME=c2cprod-rg
@@ -35,6 +35,14 @@ ACR_NAME=c2cprodacr
 AKS_CLUSTER_NAME=c2cprod-aks
 K8S_NAMESPACE=c2c-scenarios
 WORKFLOW_PRINCIPAL_OBJECT_ID=<service-principal-object-id>
+```
+
+Current values created by the bootstrap script:
+
+```text
+AZURE_CLIENT_ID=54979d89-dad3-4867-bdc7-3e4b7253529f
+WORKFLOW_PRINCIPAL_OBJECT_ID=467e5902-5dd5-446b-9c54-9dfa0676fe59
+AZURE_SUBSCRIPTION_ID=abc9a611-db88-42cb-94cb-6869755a18e6
 ```
 
 These are variables, not secrets. The workflow uses OIDC and should not store an Azure client secret.
