@@ -37,7 +37,7 @@ variable "enable_defender_plans" {
 variable "aks_node_count" {
   type        = number
   description = "AKS node count for the test cluster."
-  default     = 1
+  default     = 4
 }
 
 variable "aks_node_size" {

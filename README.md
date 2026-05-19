@@ -58,6 +58,8 @@ deploy_to_aks=true
 
 This creates 10 image names and requests 50 runtime containers in namespace `c2c-scenarios`.
 
+The 50-container target needs 4 `Standard_D2s_v4` AKS nodes in this lab because Defender/system pods also consume pod slots and each node has `maxPods=30`.
+
 For a three-repo org-level test with roughly 10 images and 50 containers total, shard the image catalog across repos:
 
 ```text

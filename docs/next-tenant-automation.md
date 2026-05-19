@@ -56,6 +56,7 @@ Use one JSON/YAML parameter file per tenant:
   "githubRepo": "code2cloud-scenarios",
   "githubEnvironment": "prod",
   "resourcePrefix": "c2cprod",
+  "aksNodeCount": 4,
   "scaleRepoCount": 1,
   "scaleImageCount": 10,
   "scaleContainersPerImage": 5,
@@ -72,8 +73,11 @@ For a stronger shared test environment, the automation should accept count knobs
 | `scaleRepoCount` | Number of GitHub repos to create or seed under the org | `1` |
 | `scaleImageCount` | Total distinct images to build across those repos | `10` |
 | `scaleContainersPerImage` | AKS replicas per image | `5` |
+| `aksNodeCount` | AKS node count for the expected workload volume | `4` |
 
 For the current CESEC Prod scale test target, use 3 repos, about 10 images, and about 50 containers total. With the checked-in scale workflow, shard the 10-image catalog as `4 + 3 + 3` across the three repos using `image_offset` and `image_count` workflow inputs.
+
+In the Prod lab, 3 `Standard_D2s_v4` nodes were not enough for 50 workload pods plus Defender/system pods because each node has `maxPods=30`. Use 4 nodes for this scale target.
 
 ## Automation Building Blocks
 

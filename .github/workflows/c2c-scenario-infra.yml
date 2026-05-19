@@ -19,6 +19,10 @@ on:
         description: Manage Defender CSPM and Containers pricing plans
         type: boolean
         default: false
+      aks_node_count:
+        description: AKS node count for the lab cluster
+        type: number
+        default: 4
 
 permissions:
   id-token: write
@@ -37,6 +41,7 @@ jobs:
       TF_VAR_github_repo: ${{ github.repository }}
       TF_VAR_workflow_principal_object_id: ${{ vars.WORKFLOW_PRINCIPAL_OBJECT_ID }}
       TF_VAR_enable_defender_plans: ${{ inputs.enable_defender_plans }}
+      TF_VAR_aks_node_count: ${{ inputs.aks_node_count }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

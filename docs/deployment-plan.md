@@ -109,9 +109,12 @@ Run `C2C Scenario Infrastructure` from GitHub Actions with:
 apply=true
 resource_prefix=c2cprod
 location=eastus
+aks_node_count=4
 ```
 
 This runs Terraform from `infra/terraform` and creates ACR/AKS plus role assignments needed by the workflow app.
+
+The scale lab target of about 50 runtime containers needs 4 `Standard_D2s_v4` nodes in this AKS cluster. Three nodes hit the Kubernetes `maxPods=30` ceiling once Defender/system pods are included.
 
 After apply succeeds, reduce the workflow app RBAC to the lab resource group where possible.
 
